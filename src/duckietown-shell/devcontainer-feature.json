@@ -1,0 +1,17 @@
+{
+    "name": "Install the duckietown shell (dts)",
+    "id": "duckietown-shell",
+    "version": "0.1.0",
+    "description": "A feature that checks the prerequisites and installs the duckietown shell in the devcontainer.",
+    "options": {
+        "version": {
+            "type": "string",
+            "default": "latest",
+            "description": "Choose whether to install the latest version of the dts or a specific version."
+        }
+    },
+    "installsAfter": [
+        "ghcr.io/devcontainers/features/common-utils",
+        "ghcr.io/devcontainers/features/docker-in-docker"
+    ]
+}
