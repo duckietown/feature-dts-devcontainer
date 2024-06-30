@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 
+
 # Update package list and install dependencies
 apt-get update
 apt-get install -y curl python3 python3-pip ca-certificates gnupg
@@ -42,7 +43,7 @@ pip3 install --no-cache-dir --user --upgrade duckietown-shell
 
 # Add the dts to the path
 # Define the file to edit
-TARGET_FILE="$HOME/.bashrc"
+TARGET_FILE="$_REMOTE_USER_HOME/.bashrc"
 
 # Check if the file exists, if not create it
 if [ ! -f "$TARGET_FILE" ]; then
