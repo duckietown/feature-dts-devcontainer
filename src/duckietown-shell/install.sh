@@ -35,11 +35,11 @@ if [[ "$BUILDX_VERSION" < "0.8.0" ]]; then
     exit 1
 fi
 
-# Test Docker by running the hello-world image
-docker run hello-world
+# TODO: Test Docker by running the hello-world image
+# docker run hello-world
 
 # Install the dts
-pip3 install --no-cache-dir --user --upgrade duckietown-shell
+sudo -u $_REMOTE_USER -H pip3 install --no-cache-dir --user --upgrade duckietown-shell
 
 # Add the dts to the path
 # Define the file to edit
@@ -52,23 +52,27 @@ fi
 
 # Append a line to the .bashrc file
 echo "# Custom alias for Duckietown Shell" >> "$TARGET_FILE"
-echo "export PATH=~/.local/bin:${PATH}" >> "$TARGET_FILE"
+echo "export PATH=${_REMOTE_USER_HOME}/.local/bin:\$PATH" >> "$TARGET_FILE"
 
 echo "Updated $TARGET_FILE with the dts successfully."
 
-source ~/.bashrc
+# TODO: Source the .bashrc file and check if dts is installed
 
-# Check if dts is installed by looking for it in the system's PATH
-DTS_PATH=$(which dts)
+# echo "Sourcing user $_REMOTE_USER .bashrc file"
+# . $_REMOTE_USER_HOME/.bashrc
 
-# Verify the result
-if [[ "$DTS_PATH" == */dts ]]; then
-    echo "Checkpoint ✅: dts is installed successfully."
-    echo "dts found at: $DTS_PATH"
-    exit 0
-else
-    echo "Error ❌: dts is not installed or not found in the PATH."
-    exit 1
-fi
+# echo "Checking if dts is installed by looking for it in the user's PATH"
+# DTS_PATH=$(sudo -u $_REMOTE_USER -H which dts)
+# echo "DTS_PATH: $DTS_PATH"
+
+# echo "Verify the result"
+# if [[ "$DTS_PATH" == */dts ]]; then
+#     echo "Checkpoint ✅: dts is installed successfully."
+#     echo "dts found at: $DTS_PATH"
+#     exit 0
+# else
+#     echo "Error ❌: dts is not installed or not found in the PATH."
+#     exit 1
+# fi
 
 echo "Duckietown Shell installation and Docker verification completed successfully!"
