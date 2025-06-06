@@ -25,12 +25,12 @@ docker buildx version
 DOCKER_VERSION=$(docker --version | awk '{print $3}' | sed 's/,//')
 BUILDX_VERSION=$(docker buildx version | awk '{print $2}')
 
-if [[ "$DOCKER_VERSION" < "20.10.0" ]]; then
+if dpkg --compare-versions "$DOCKER_VERSION" lt "20.10.0"; then
     echo "Docker version is too old: $DOCKER_VERSION"
     exit 1
 fi
 
-if [[ "$BUILDX_VERSION" < "0.8.0" ]]; then
+if dpkg --compare-versions "$BUILDX_VERSION" lt "0.8.0"; then
     echo "Docker buildx version is too old: $BUILDX_VERSION"
     exit 1
 fi
